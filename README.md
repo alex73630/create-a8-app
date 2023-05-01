@@ -67,6 +67,7 @@ yarn create a8-app
 pnpm create a8-app@latest
 ```
 
+
 [downloads-image]: https://img.shields.io/npm/dm/create-a8-app?color=364fc7&logoColor=364fc7
 [npm-url]: https://www.npmjs.com/package/create-a8-app
 [npm-image]: https://img.shields.io/npm/v/create-a8-app?color=0b7285&logoColor=0b7285
