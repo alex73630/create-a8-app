@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/alex73630/create-a8-app/compare/v1.1.0...v1.1.1) (2023-05-01)
+
+
+### Bug Fixes
+
+* workaround to fix failing ci due to ratelimit ([2f3c928](https://github.com/alex73630/create-a8-app/commit/2f3c9283ab9bdd69d2262034ffa44a94c415bba6))
+
 # [1.1.0](https://github.com/alex73630/create-a8-app/compare/v1.0.2...v1.1.0) (2023-05-01)
 
 
