@@ -1,0 +1,30 @@
+{
+  "name": "template",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/main",
+    "start:dev": "tsup --watch",
+    "typecheck": "tsc",
+    "clean": "rm -rf dist node_modules",
+    "build": "tsup",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.2.2",
+    "dotenv": "^16.0.3",
+    "zod": "^3.21.4"
+  }
+}
