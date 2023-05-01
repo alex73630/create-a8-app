@@ -4,3 +4,6 @@ docker-compose.yaml
 Dockerfile
 node_modules
 dist
+{{#if usePrisma}}
+prisma/db.sqlite*
+{{/if}}

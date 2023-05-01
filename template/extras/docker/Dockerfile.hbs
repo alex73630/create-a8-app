@@ -1,0 +1,53 @@
+FROM node:18-alpine as base
+
+FROM base as deps
+
+ENV CI true
+WORKDIR /app
+{{#ifEquals pkgManager "npm"}}
+COPY package*.json ./
+RUN npm ci --ommit=dev
+{{/ifEquals}}
+{{#ifEquals pkgManager "yarn"}}
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --production
+{{/ifEquals}}
+{{#ifEquals pkgManager "pnpm"}}
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --production
+{{/ifEquals}}
+
+
+FROM deps as builder
+
+WORKDIR /app
+COPY . .
+{{#ifEquals pkgManager "npm"}}
+RUN npm ci
+{{/ifEquals}}
+{{#ifEquals pkgManager "yarn"}}
+RUN yarn install --frozen-lockfile
+{{/ifEquals}}
+{{#ifEquals pkgManager "pnpm"}}
+RUN pnpm install --frozen-lockfile
+{{/ifEquals}}
+{{#if usePrisma}}
+RUN {{pkgRunExternal}} prisma generate
+{{/if}}
+RUN {{pkgRunScript}} build
+
+FROM base as runner
+
+WORKDIR /app
+RUN chown -R node:node /app && \
+chmod -R 770 /app
+ENV NODE_ENV production
+COPY --from=builder --chown=node:node /app/dist ./dist
+COPY --from=deps --chown=node:node /app/node_modules ./node_modules
+{{#if usePrisma}}
+COPY --from=builder --chown=node:node /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=node:node /app/prisma ./prisma
+{{/if}}
+COPY --from=builder --chown=node:node /app/package.json ./
+USER node
+CMD ["node", "dist/main"]

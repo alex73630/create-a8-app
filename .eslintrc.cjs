@@ -13,7 +13,7 @@ const config = {
 		ecmaVersion: "latest",
 		sourceType: "module",
 		tsconfigRootDir: __dirname,
-		project: ["./tsconfig.json"]
+		project: ["./tsconfig.json", "./template/tsconfig.eslint.json"]
 	},
 	rules: {
 		"prettier/prettier": ["error", {}, { usePrettierrc: true }], // Includes .prettierrc.cjs rules
