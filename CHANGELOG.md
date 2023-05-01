@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/alex73630/create-a8-app/compare/v1.0.2...v1.1.0) (2023-05-01)
+
+
+### Features
+
+* add handlebars for templating ([e789950](https://github.com/alex73630/create-a8-app/commit/e789950ed65b8290f8f2368bd03379ca425e64a2))
+
 ## [1.0.2](https://github.com/alex73630/create-a8-app/compare/v1.0.1...v1.0.2) (2023-05-01)
 
 ### Bug Fixes
