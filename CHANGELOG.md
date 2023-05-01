@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/alex73630/create-a8-app/compare/v1.1.1...v1.1.2) (2023-05-01)
+
+
+### Bug Fixes
+
+* forgot to set function as async ([591dd87](https://github.com/alex73630/create-a8-app/commit/591dd87f6d9faea2f5928ed962f2af4a04f16c5c))
+
 ## [1.1.1](https://github.com/alex73630/create-a8-app/compare/v1.1.0...v1.1.1) (2023-05-01)
 
 
