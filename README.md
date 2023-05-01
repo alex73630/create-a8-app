@@ -23,19 +23,19 @@ Inspired by <a rel="noopener noreferrer" target="_blank" href="https://github.co
 
 ## Table of contents
 
-- <a href="#about">The A8 Stack</a>
-- <a href="#axioms">A8 Axioms</a>
-- <a href="#getting-started">Getting Started</a>
-- <a href="#community">Community</a>
-- <a href="#contributors">Contributors</a>
+-   <a href="#about">The A8 Stack</a>
+-   <a href="#axioms">A8 Axioms</a>
+-   <a href="#getting-started">Getting Started</a>
+-   <a href="#community">Community</a>
+-   <a href="#contributors">Contributors</a>
 
 <h2 id="about">The A8 Stack</h2>
 
 The _"A8 Stack"_ is a TypeScript development stack made by [Alex73630](https://twitter.com/alex73630) focused on **simplicity**, **modularity**, and **full-stack typesafety**. It consists of:
 
-- [TypeScript](https://typescriptlang.org)
-- [Prisma](https://prisma.io)
-- [T3-Env](https://env.t3.gg/)
+-   [TypeScript](https://typescriptlang.org)
+-   [Prisma](https://prisma.io)
+-   [T3-Env](https://env.t3.gg/)
 
 ### So... what is `create-a8-app`? A template?
 
