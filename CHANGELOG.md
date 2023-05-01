@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/alex73630/create-a8-app/compare/v1.1.2...v1.1.3) (2023-05-01)
+
+
+### Bug Fixes
+
+* couples of small mistakes were made ([3a33e43](https://github.com/alex73630/create-a8-app/commit/3a33e438a23cf932711bf352e6a9d2d0e756219c))
+
 ## [1.1.2](https://github.com/alex73630/create-a8-app/compare/v1.1.1...v1.1.2) (2023-05-01)
 
 
