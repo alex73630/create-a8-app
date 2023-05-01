@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/alex73630/create-a8-app/compare/v1.0.1...v1.0.2) (2023-05-01)
+
+
+### Bug Fixes
+
+* version bump to run ci again ([91e781c](https://github.com/alex73630/create-a8-app/commit/91e781c5c20462da4397e3a71cef8001a0657012))
+
 ## [1.0.1](https://github.com/alex73630/create-a8-app/compare/v1.0.0...v1.0.1) (2023-05-01)
 
 
