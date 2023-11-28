@@ -1,6 +1,15 @@
 {
-	"include": ["src/**/*", ".prettier.config.cjs", ".eslintrc.cjs", "tsup.config.ts"],
-	"exclude": ["node_modules", "dist"],
+	"include": [
+		"src/**/*",
+		".prettier.config.cjs",
+		".eslintrc.cjs",
+		"jest.config.cjs",
+		"tsup.config.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
 	"compilerOptions": {
 		/* Visit https://aka.ms/tsconfig to read more about this file */
 		/* Projects */
@@ -10,11 +19,13 @@
 		"target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 		"lib": [] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
 		/* Modules */
-		"module": "NodeNext" /* Specify what module code is generated. */,
-		"moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+		"module": "ESNext" /* Specify what module code is generated. */,
+		"moduleResolution": "Node",
 		"baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
 		"paths": {
-			"~/*": ["./src/*"]
+			"~/*": [
+				"./src/*"
+			]
 		},
 		"resolveJsonModule": true /* Enable importing .json files. */,
 		/* JavaScript Support */

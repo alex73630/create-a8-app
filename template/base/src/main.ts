@@ -1,7 +1,9 @@
 import "~/env"
 
-function main() {
+export function main() {
 	console.log("Hello World!")
+
+	return "Hello World!"
 }
 
 main()
