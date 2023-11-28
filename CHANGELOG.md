@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/alex73630/create-a8-app/compare/v1.1.3...v1.2.0) (2023-11-28)
+
+
+### Features
+
+* upgrade deps and add jest ([edac50d](https://github.com/alex73630/create-a8-app/commit/edac50de3496b97dfeac8a519e5d9c3c4e51d66f))
+
 ## [1.1.3](https://github.com/alex73630/create-a8-app/compare/v1.1.2...v1.1.3) (2023-05-01)
 
 
