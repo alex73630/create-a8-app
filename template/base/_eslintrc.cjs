@@ -32,7 +32,7 @@ const config = {
 		"prettier/prettier": ["error", {}, { usePrettierrc: true }], // Includes .prettierrc.cjs rules
 		"@typescript-eslint/restrict-template-expressions": "off",
 		"@typescript-eslint/no-unused-vars": [
-			"error",
+			"warn",
 			{ argsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_" }
 		],
 		"@typescript-eslint/consistent-type-imports": [
