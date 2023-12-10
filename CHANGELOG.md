@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/alex73630/create-a8-app/compare/v1.2.0...v1.3.0) (2023-12-10)
+
+
+### Features
+
+* update config ([900e6e9](https://github.com/alex73630/create-a8-app/commit/900e6e914b2b2378a5b0a8230c94dc314662d812))
+
 # [1.2.0](https://github.com/alex73630/create-a8-app/compare/v1.1.3...v1.2.0) (2023-11-28)
 
 
