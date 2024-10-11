@@ -216,7 +216,7 @@ const promptPackages = async (): Promise<AvailablePackages[]> => {
 		choices: availablePackages
 			.filter((pkg) => pkg !== "envVariables") // don't prompt for env-vars
 			.map((pkgName) => ({
-				name: pkgName,
+				value: pkgName,
 				checked: false
 			}))
 	})

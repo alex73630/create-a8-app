@@ -22,7 +22,7 @@
 		] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
 		/* Modules */
 		"module": "ESNext" /* Specify what module code is generated. */,
-		"moduleResolution": "Node",
+		"moduleResolution": "Bundler",
 		"baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
 		"paths": {
 			"~/*": [
