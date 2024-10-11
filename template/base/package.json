@@ -16,7 +16,7 @@
 	},
 	"private": true,
 	"devDependencies": {
-		"@types/eslint": "^8.57.1",
+		"@types/eslint": "^8.56.10",
 		"@types/jest": "^29.5.13",
 		"@types/node": "^22.7.5",
 		"@typescript-eslint/eslint-plugin": "^8.8.1",
