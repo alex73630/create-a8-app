@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/alex73630/create-a8-app/compare/v1.3.0...v1.4.0) (2024-10-11)
+
+
+### Features
+
+* trigger update ([8bc8b6b](https://github.com/alex73630/create-a8-app/commit/8bc8b6b0b6257cf17f4abd549edfd098e18853ae))
+
 # [1.3.0](https://github.com/alex73630/create-a8-app/compare/v1.2.0...v1.3.0) (2023-12-10)
 
 

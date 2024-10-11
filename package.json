@@ -1,6 +1,6 @@
 {
 	"name": "create-a8-app",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"author": "Alexandre Sanchez (@alex73630)",
 	"license": "MIT",
 	"description": "Quickest way to start a new TypeScript app, inspired by create-t3-app",
