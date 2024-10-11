@@ -1,6 +1,16 @@
 {
-	"include": [".eslintrc.cjs", "tsup.config.ts", "commitlint.config.cjs", "lint-staged.config.cjs", "src"],
-	"exclude": ["node_modules", "dist", "template"],
+	"include": [
+		".eslintrc.cjs",
+		"tsup.config.ts",
+		"commitlint.config.cjs",
+		"lint-staged.config.cjs",
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"template"
+	],
 	"compilerOptions": {
 		/* Visit https://aka.ms/tsconfig to read more about this file */
 		/* Projects */
@@ -26,12 +36,14 @@
 		"useDefineForClassFields": true /* Emit ECMAScript-standard-compliant class fields. */,
 		// "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 		/* Modules */
-		"module": "Node16" /* Specify what module code is generated. */,
+		"module": "esnext" /* Specify what module code is generated. */,
 		// "rootDir": "./",                                  /* Specify the root folder within your source files. */
-		"moduleResolution": "nodenext" /* Specify how TypeScript looks up a file from a given module specifier. */,
+		"moduleResolution": "bundler" /* Specify how TypeScript looks up a file from a given module specifier. */,
 		"baseUrl": "./",
 		"paths": {
-			"~/*": ["./src/*"]
+			"~/*": [
+				"./src/*"
+			]
 		},
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
 		// "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
