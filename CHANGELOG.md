@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/alex73630/create-a8-app/compare/v1.4.0...v1.5.0) (2024-10-28)
+
+
+### Features
+
+* add drizzle to supported orm list and upgrade prisma ([43b6497](https://github.com/alex73630/create-a8-app/commit/43b64979f05b5334aaa5596bb5293a54c27d0ec8))
+
 # [1.4.0](https://github.com/alex73630/create-a8-app/compare/v1.3.0...v1.4.0) (2024-10-11)
 
 
