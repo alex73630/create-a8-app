@@ -6,10 +6,17 @@ import { PKG_ROOT } from "~/consts.js"
 export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
 	const usingDocker = packages?.docker.inUse
 	const usingPrisma = packages?.prisma.inUse
+	const usingDrizzle = packages?.drizzle.inUse
 
-	const envContent = getEnvContent(!!usingDocker, !!usingPrisma)
+	const envContent = getEnvContent(!!usingDocker, !!usingPrisma, !!usingDrizzle)
 
-	const envFile = usingPrisma ? "with-prisma.ts" : ""
+	let envFile = ""
+	if (usingPrisma) {
+		envFile = "with-prisma.ts"
+	}
+	if (usingDrizzle) {
+		envFile = "with-drizzle.ts"
+	}
 
 	if (envFile !== "") {
 		const envSchemaSrc = path.join(PKG_ROOT, "template/extras/src/env", envFile)
@@ -24,7 +31,7 @@ export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
 	fs.writeFileSync(envExampleDest, exampleEnvContent + envContent, "utf-8")
 }
 
-const getEnvContent = (usingDocker: boolean, usingPrisma: boolean) => {
+const getEnvContent = (usingDocker: boolean, usingPrisma: boolean, usingDrizzle: boolean) => {
 	let content = `
 # When adding additional environment variables, the schema in "/src/env.ts"
 # should be updated accordingly.
@@ -49,7 +56,21 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 DATABASE_URL="file:./db.sqlite"
 `
 
-	if (!usingDocker && !usingPrisma)
+	if (usingDrizzle)
+		if (usingDocker)
+			content += `
+# Drizzle
+# https://orm.drizzle.team/docs/get-started-postgresql#node-postgres
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+`
+		else
+			content += `
+# Drizzle
+# https://orm.drizzle.team/docs/get-started-sqlite#libsql
+DATABASE_URL="file:./db.sqlite"
+`
+
+	if (!usingDocker && !usingPrisma && !usingDrizzle)
 		content += `
 # Example:
 # SERVERVAR="foo"

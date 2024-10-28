@@ -21,24 +21,28 @@ interface CliFlags {
 	/** @internal Used in CI. */
 	prisma: boolean
 	/** @internal Used in CI. */
+	drizzle: boolean
+	/** @internal Used in CI. */
 	docker: boolean
 }
 
 interface CliResults {
 	appName: string
+	orm?: AvailablePackages[]
 	packages: AvailablePackages[]
 	flags: CliFlags
 }
 
 const defaultOptions: CliResults = {
 	appName: DEFAULT_APP_NAME,
-	packages: ["prisma", "docker"],
+	packages: ["drizzle", "docker"],
 	flags: {
 		noGit: false,
 		noInstall: false,
 		default: false,
 		CI: false,
 		prisma: false,
+		drizzle: false,
 		docker: false,
 		importAlias: "~/"
 	}
@@ -65,26 +69,14 @@ export const runCli = async () => {
 		.option("--CI", "Boolean value if we're running in CI", false)
 		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
 		.option(
-			"--tailwind [boolean]",
-			"Experimental: Boolean value if we should install Tailwind CSS. Must be used in conjunction with `--CI`.",
-			(value) => !!value && value !== "false"
-		)
-		/** @experimental Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
-		.option(
-			"--nextAuth [boolean]",
-			"Experimental: Boolean value if we should install NextAuth.js. Must be used in conjunction with `--CI`.",
-			(value) => !!value && value !== "false"
-		)
-		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
-		.option(
 			"--prisma [boolean]",
 			"Experimental: Boolean value if we should install Prisma. Must be used in conjunction with `--CI`.",
 			(value) => !!value && value !== "false"
 		)
 		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
 		.option(
-			"--trpc [boolean]",
-			"Experimental: Boolean value if we should install tRPC. Must be used in conjunction with `--CI`.",
+			"--drizzle [boolean]",
+			"Experimental: Boolean value if we should install Drizzle. Must be used in conjunction with `--CI`.",
 			(value) => !!value && value !== "false"
 		)
 		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
@@ -126,6 +118,7 @@ export const runCli = async () => {
 	if (cliResults.flags.CI) {
 		CIMode = true
 		cliResults.packages = []
+		if (cliResults.flags.drizzle) cliResults.packages.push("drizzle")
 		if (cliResults.flags.prisma) cliResults.packages.push("prisma")
 		if (cliResults.flags.docker) cliResults.packages.push("docker")
 	}
@@ -209,19 +202,36 @@ const promptAppName = async (): Promise<string> => {
 }
 
 const promptPackages = async (): Promise<AvailablePackages[]> => {
-	const { packages } = await inquirer.prompt<Pick<CliResults, "packages">>({
-		name: "packages",
-		type: "checkbox",
-		message: "Which packages would you like to enable?",
-		choices: availablePackages
-			.filter((pkg) => pkg !== "envVariables") // don't prompt for env-vars
+	const { orm } = await inquirer.prompt<{ orm: "Prisma" | "Drizzle" | "None" }>({
+		name: "orm",
+		type: "select",
+		message: "Which ORM would you like to use?",
+		choices: ["None", "Drizzle", "Prisma"] // only show prisma and drizzle
 			.map((pkgName) => ({
 				value: pkgName,
 				checked: false
 			}))
 	})
 
-	return packages
+	const { packages } = await inquirer.prompt<Pick<CliResults, "packages">>({
+		name: "packages",
+		type: "checkbox",
+		message: "Which features would you like to enable?",
+		choices: availablePackages
+			.filter((pkg) => pkg !== "envVariables" && !["prisma", "drizzle"].includes(pkg)) // don't prompt for env-vars
+			.map((pkgName) => ({
+				value: pkgName,
+				checked: false
+			}))
+	})
+
+	const finalPackages = [...packages]
+
+	if (orm !== "None") {
+		finalPackages.push(orm.toLowerCase() as AvailablePackages)
+	}
+
+	return finalPackages
 }
 
 const promptGit = async (): Promise<boolean> => {

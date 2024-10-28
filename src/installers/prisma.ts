@@ -26,7 +26,7 @@ export const prismaInstaller: Installer = ({ projectDir, packages }) => {
 	)
 	const schemaDest = path.join(projectDir, "prisma/schema.prisma")
 
-	const clientSrc = path.join(extrasDir, "src/db.ts")
+	const clientSrc = path.join(extrasDir, "src/db/prisma/db.ts")
 	const clientDest = path.join(projectDir, "src/db.ts")
 
 	const mainSrc = path.join(extrasDir, "src/main/with-prisma.ts")

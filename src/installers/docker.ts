@@ -1,4 +1,3 @@
-// import { type PackageJson } from "type-fest";
 import { type Installer } from "~/installers/index.js"
 import path from "path"
 import fs from "fs-extra"
@@ -41,22 +40,10 @@ export const dockerInstaller: Installer = ({ projectDir, packages, pkgManager })
 
 	fs.writeFileSync(dockerignoreDest, dockerignore, "utf-8")
 
-	if (packages?.prisma.inUse) {
-		const dockercomposeSrc = path.join(extrasDir, "docker/docker-compose", "with-prisma.yaml")
+	if (packages?.prisma.inUse || packages?.drizzle.inUse) {
+		const dockercomposeSrc = path.join(extrasDir, "docker/docker-compose", "with-db.yaml")
 		const dockercomposeDest = path.join(projectDir, "docker-compose.yaml")
 
 		fs.copySync(dockercomposeSrc, dockercomposeDest)
 	}
-
-	// add postinstall script to package.json
-	// const packageJsonPath = path.join(projectDir, "package.json");
-
-	// const packageJsonContent = fs.readJSONSync(packageJsonPath) as PackageJson;
-	// packageJsonContent.scripts = {
-	// 	...packageJsonContent.scripts,
-	// 	postinstall: "prisma generate",
-	// };
-	// fs.writeJSONSync(packageJsonPath, packageJsonContent, {
-	// 	spaces: 2,
-	// });
 }
