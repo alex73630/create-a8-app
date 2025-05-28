@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/alex73630/create-a8-app/compare/v1.5.0...v2.0.0) (2025-05-28)
+
+
+### Features
+
+* massive lib upgrade ([c1027df](https://github.com/alex73630/create-a8-app/commit/c1027df27180f4c0a989b39d10383a364438295b))
+
+
+### BREAKING CHANGES
+
+* bump minimum node version to 22
+
 # [1.5.0](https://github.com/alex73630/create-a8-app/compare/v1.4.0...v1.5.0) (2024-10-28)
 
 
