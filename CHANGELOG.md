@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/alex73630/create-a8-app/compare/v2.0.0...v2.1.0) (2025-05-28)
+
+
+### Features
+
+* add yarn configuration and bump orm dependencies versions ([4c07c3d](https://github.com/alex73630/create-a8-app/commit/4c07c3d1890a731cbfd2244995f951dd18aa934d))
+
 # [2.0.0](https://github.com/alex73630/create-a8-app/compare/v1.5.0...v2.0.0) (2025-05-28)
 
 
