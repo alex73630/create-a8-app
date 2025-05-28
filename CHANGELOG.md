@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/alex73630/create-a8-app/compare/v2.1.0...v2.1.1) (2025-05-28)
+
+
+### Bug Fixes
+
+* update entry and onSuccess paths in tsdown configuration ([fcbadf8](https://github.com/alex73630/create-a8-app/commit/fcbadf81fea59b2dfe1ac1fe2510a234c72deff8))
+
 # [2.1.0](https://github.com/alex73630/create-a8-app/compare/v2.0.0...v2.1.0) (2025-05-28)
 
 
