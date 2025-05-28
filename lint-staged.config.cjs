@@ -1,4 +1,4 @@
-/** @type {import("lint-staged").Config} */
+/** @type {import("lint-staged").Configuration} */
 module.exports = {
 	"*.{js,cjs,mjs,ts}": (filenames) => [
 		`eslint --fix ${filenames.join(" ")}`,

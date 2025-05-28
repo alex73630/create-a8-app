@@ -1,7 +1,9 @@
-import { type Installer } from "~/installers/index.js"
 import path from "path"
+
 import fs from "fs-extra"
+
 import { PKG_ROOT } from "~/consts.js"
+import { type Installer } from "~/installers/index.js"
 
 export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
 	const usingDocker = packages?.docker.inUse

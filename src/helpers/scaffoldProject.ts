@@ -1,8 +1,10 @@
 import path from "path"
+
 import chalk from "chalk"
 import fs from "fs-extra"
 import inquirer from "inquirer"
 import ora from "ora"
+
 import { PKG_ROOT } from "~/consts.js"
 import { type InstallerOptions } from "~/installers/index.js"
 import { logger } from "~/utils/logger.js"
@@ -84,6 +86,7 @@ export const scaffoldProject = async ({ projectName, projectDir, pkgManager, noI
 
 	fs.copySync(srcDir, projectDir)
 	fs.renameSync(path.join(projectDir, "_gitignore"), path.join(projectDir, ".gitignore"))
+	fs.renameSync(path.join(projectDir, "_gitattributes"), path.join(projectDir, ".gitattributes"))
 
 	const scaffoldedName = projectName === "." ? "App" : chalk.cyan.bold(projectName)
 

@@ -1,7 +1,8 @@
-import { type PkgInstallerMap } from "~/installers/index.js"
 import path from "path"
+
 import { installPackages } from "~/helpers/installPackages.js"
 import { scaffoldProject } from "~/helpers/scaffoldProject.js"
+import { type PkgInstallerMap } from "~/installers/index.js"
 import { getUserPkgManager } from "~/utils/getUserPkgManager.js"
 
 interface CreateProjectOptions {

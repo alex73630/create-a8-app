@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup"
+import { defineConfig } from "tsdown"
 
 const isDev = process.env.npm_lifecycle_event === "dev"
 
@@ -8,7 +8,6 @@ export default defineConfig({
 	entry: ["src/index.ts"],
 	format: ["esm"],
 	minify: !isDev,
-	metafile: !isDev,
 	sourcemap: true,
 	target: "esnext",
 	outDir: "dist",

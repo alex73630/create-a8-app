@@ -2,9 +2,9 @@
 	"include": [
 		"src/**/*",
 		".prettier.config.cjs",
-		".eslintrc.cjs",
-		"jest.config.cjs",
-		"tsup.config.ts"
+		"eslint.config.mjs",
+		"vitest.config.ts",
+		"tsdown.config.ts"
 	],
 	"exclude": [
 		"node_modules",

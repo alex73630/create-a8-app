@@ -1,9 +1,10 @@
-import { type AvailablePackages } from "~/installers/index.js"
-import { availablePackages } from "~/installers/index.js"
 import chalk from "chalk"
 import { Command } from "commander"
 import inquirer from "inquirer"
+
 import { CREATE_A8_APP, DEFAULT_APP_NAME } from "~/consts.js"
+import { availablePackages } from "~/installers/index.js"
+import { type AvailablePackages } from "~/installers/index.js"
 import { getVersion } from "~/utils/getA8Version.js"
 import { getUserPkgManager } from "~/utils/getUserPkgManager.js"
 import { logger } from "~/utils/logger.js"

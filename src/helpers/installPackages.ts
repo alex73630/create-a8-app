@@ -1,6 +1,7 @@
-import { type InstallerOptions, type PkgInstallerMap } from "~/installers/index.js"
 import chalk from "chalk"
 import ora from "ora"
+
+import { type InstallerOptions, type PkgInstallerMap } from "~/installers/index.js"
 import { logger } from "~/utils/logger.js"
 
 type InstallPackagesOptions = {

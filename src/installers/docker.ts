@@ -1,7 +1,10 @@
-import { type Installer } from "~/installers/index.js"
 import path from "path"
+
 import fs from "fs-extra"
+
 import { PKG_ROOT } from "~/consts.js"
+import { type Installer } from "~/installers/index.js"
+
 import { handlebarsParser } from "../helpers/handlebarsParser.js"
 
 export const dockerInstaller: Installer = ({ projectDir, packages, pkgManager }) => {

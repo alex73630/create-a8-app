@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 
-import { type PackageJson } from "type-fest"
 import path from "path"
+
 import fs from "fs-extra"
+import { type PackageJson } from "type-fest"
+
 import { runCli } from "~/cli/index.js"
 import { createProject } from "~/helpers/createProject.js"
 import { initializeGit } from "~/helpers/git.js"
-import { setImportAlias } from "~/helpers/setImportAlias.js"
 import { logNextSteps } from "~/helpers/logNextSteps.js"
+import { setImportAlias } from "~/helpers/setImportAlias.js"
 import { buildPkgInstallerMap } from "~/installers/index.js"
 import { logger } from "~/utils/logger.js"
 import { parseNameAndPath } from "~/utils/parseNameAndPath.js"
 import { renderTitle } from "~/utils/renderTitle.js"
-import { getNpmVersion, renderVersionWarning } from "./utils/renderVersionWarning.js"
+
 import { installDependencies } from "./helpers/installDependencies.js"
 import { getVersion } from "./utils/getA8Version.js"
+import { getNpmVersion, renderVersionWarning } from "./utils/renderVersionWarning.js"
 
 type CA8APackageJSON = PackageJson & {
 	ca8aMetadata?: {
@@ -25,7 +28,9 @@ type CA8APackageJSON = PackageJson & {
 const main = async () => {
 	const npmVersion = await getNpmVersion()
 	renderTitle()
-	npmVersion && renderVersionWarning(npmVersion)
+	if (npmVersion) {
+		renderVersionWarning(npmVersion)
+	}
 
 	const {
 		appName,
@@ -63,7 +68,7 @@ const main = async () => {
 	}
 
 	// Rename _eslintrc.json to .eslintrc.json - we use _eslintrc.json to avoid conflicts with the monorepos linter
-	fs.renameSync(path.join(projectDir, "_eslintrc.cjs"), path.join(projectDir, ".eslintrc.cjs"))
+	fs.renameSync(path.join(projectDir, "_eslint.config.mjs"), path.join(projectDir, "eslint.config.mjs"))
 
 	if (!noGit) {
 		await initializeGit(projectDir)

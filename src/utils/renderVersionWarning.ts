@@ -1,4 +1,6 @@
 import { execSync } from "child_process"
+import https from "https"
+
 import { getVersion } from "./getA8Version.js"
 import { logger } from "./logger.js"
 
@@ -29,7 +31,6 @@ export const renderVersionWarning = (npmVersion: string) => {
  * directory of this source tree.
  * https://github.com/facebook/create-react-app/blob/main/packages/create-react-app/LICENSE
  */
-import https from "https"
 
 type DistTagsBody = {
 	latest: string
@@ -46,12 +47,12 @@ function checkForLatestVersion(): Promise<string> {
 						resolve((JSON.parse(body) as DistTagsBody).latest)
 					})
 				} else {
-					reject()
+					reject(new Error(`Failed to fetch latest version: status code ${res.statusCode}`))
 				}
 			})
 			.on("error", () => {
 				// logger.error("Unable to check for latest version.");
-				reject()
+				reject(new Error("Unable to check for latest version."))
 			})
 	})
 }

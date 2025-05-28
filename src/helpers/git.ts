@@ -1,17 +1,19 @@
-import chalk from "chalk"
 import { execSync } from "child_process"
+import path from "path"
+
+import chalk from "chalk"
 import { execa } from "execa"
 import fs from "fs-extra"
 import inquirer from "inquirer"
 import ora from "ora"
-import path from "path"
+
 import { logger } from "~/utils/logger.js"
 
 const isGitInstalled = (dir: string): boolean => {
 	try {
 		execSync("git --version", { cwd: dir })
 		return true
-	} catch (_e) {
+	} catch {
 		return false
 	}
 }
@@ -30,7 +32,7 @@ const isInsideGitRepo = async (dir: string): Promise<boolean> => {
 			stdout: "ignore"
 		})
 		return true
-	} catch (_e) {
+	} catch {
 		// Else, it will throw a git-error and we return false
 		return false
 	}
@@ -125,7 +127,7 @@ export const initializeGit = async (projectDir: string) => {
 		}
 		await execa("git", ["add", "."], { cwd: projectDir })
 		spinner.succeed(`${chalk.green("Successfully initialized and staged")} ${chalk.green.bold("git")}\n`)
-	} catch (error) {
+	} catch {
 		// Safeguard, should be unreachable
 		spinner.fail(`${chalk.bold.red("Failed:")} could not initialize git. Update git to the latest version!\n`)
 	}

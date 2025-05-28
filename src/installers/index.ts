@@ -1,8 +1,9 @@
-import { type PackageManager } from "~/utils/getUserPkgManager.js"
+import { drizzleInstaller } from "~/installers/drizzle.js"
 import { envVariablesInstaller } from "~/installers/envVars.js"
 import { prismaInstaller } from "~/installers/prisma.js"
+import { type PackageManager } from "~/utils/getUserPkgManager.js"
+
 import { dockerInstaller } from "./docker.js"
-import { drizzleInstaller } from "~/installers/drizzle.js"
 
 // Turning this into a const allows the list to be iterated over for programatically creating prompt options
 // Should increase extensability in the future

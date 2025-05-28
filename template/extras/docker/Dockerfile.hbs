@@ -1,15 +1,18 @@
-FROM node:18-alpine as base
+FROM node:22-alpine AS base
+ENV NODE_ENV=production CI=true
+RUN apk update --no-cache && apk add --no-cache libc6-compat
 
-FROM base as deps
+FROM base AS deps
 
-ENV CI true
 WORKDIR /app
 {{#ifEquals pkgManager "npm"}}
 COPY package*.json ./
-RUN npm ci --ommit=dev
+RUN npm ci --omit=dev
 {{/ifEquals}}
 {{#ifEquals pkgManager "yarn"}}
 COPY package.json yarn.lock ./
+ENV YARN_VERSION=4.9.1
+RUN corepack enable && corepack prepare yarn@${YARN_VERSION} && yarn set version ${YARN_VERSION}
 RUN yarn install --frozen-lockfile --production
 {{/ifEquals}}
 {{#ifEquals pkgManager "pnpm"}}
@@ -17,8 +20,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --production
 {{/ifEquals}}
 
-
-FROM deps as builder
+FROM deps AS builder
 
 WORKDIR /app
 COPY . .
@@ -36,18 +38,25 @@ RUN {{pkgRunExternal}} prisma generate
 {{/if}}
 RUN {{pkgRunScript}} build
 
-FROM base as runner
+FROM base AS runner
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 backend
+USER backend
 
 WORKDIR /app
-RUN chown -R node:node /app && \
+
+RUN chown -R backend:nodejs /app && \
 chmod -R 770 /app
-ENV NODE_ENV production
-COPY --from=builder --chown=node:node /app/dist ./dist
-COPY --from=deps --chown=node:node /app/node_modules ./node_modules
+
+COPY --from=builder --chown=backend:nodejs /app/dist ./dist
+COPY --from=deps --chown=backend:nodejs /app/node_modules ./node_modules
 {{#if usePrisma}}
-COPY --from=builder --chown=node:node /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder --chown=node:node /app/prisma ./prisma
+COPY --from=builder --chown=backend:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=backend:nodejs /app/prisma ./prisma
 {{/if}}
-COPY --from=builder --chown=node:node /app/package.json ./
-USER node
+
+COPY --from=builder --chown=backend:nodejs /app/package.json ./
+
 CMD ["node", "dist/main"]

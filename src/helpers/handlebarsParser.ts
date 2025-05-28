@@ -1,4 +1,5 @@
 import Handlebars from "handlebars"
+
 import { type PackageManager } from "../utils/getUserPkgManager.js"
 
 interface HandlebarsData {

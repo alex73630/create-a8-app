@@ -1,14 +1,14 @@
 import chalk from "chalk"
 import { execa } from "execa"
 import ora, { type Ora } from "ora"
-import { getUserPkgManager, type PackageManager } from "~/utils/getUserPkgManager.js"
+
+import { type PackageManager, getUserPkgManager } from "~/utils/getUserPkgManager.js"
 import { logger } from "~/utils/logger.js"
 
 type Options = {
 	projectDir: string
 }
 
-/*eslint-disable @typescript-eslint/no-floating-promises*/
 const runInstallCommand = async (pkgManager: PackageManager, projectDir: string): Promise<Ora | null> => {
 	switch (pkgManager) {
 		// When using npm, inherit the stderr stream so that the progress bar is shown
@@ -32,7 +32,7 @@ const runInstallCommand = async (pkgManager: PackageManager, projectDir: string)
 					const text = data.toString()
 
 					if (text.includes("Progress")) {
-						pnpmSpinner.text = text.includes("|") ? text.split(" | ")[1] ?? "" : text
+						pnpmSpinner.text = text.includes("|") ? (text.split(" | ")[1] ?? "") : text
 					}
 				})
 				pnpmSubprocess.on("error", (e) => rej(e))
@@ -58,7 +58,6 @@ const runInstallCommand = async (pkgManager: PackageManager, projectDir: string)
 			return yarnSpinner
 	}
 }
-/*eslint-enable @typescript-eslint/no-floating-promises*/
 
 export const installDependencies = async ({ projectDir }: Options) => {
 	logger.info("Installing dependencies...")
