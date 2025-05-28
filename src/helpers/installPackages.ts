@@ -2,6 +2,7 @@ import chalk from "chalk"
 import ora from "ora"
 
 import { type InstallerOptions, type PkgInstallerMap } from "~/installers/index.js"
+import { yarnInstaller } from "~/installers/yarn"
 import { logger } from "~/utils/logger.js"
 
 type InstallPackagesOptions = {
@@ -11,6 +12,11 @@ type InstallPackagesOptions = {
 export const installPackages = (options: InstallPackagesOptions) => {
 	const { packages } = options
 	logger.info("Adding boilerplate...")
+
+	// Do some extra configuration for Yarn
+	if (options.pkgManager === "yarn") {
+		yarnInstaller(options)
+	}
 
 	for (const [name, pkgOpts] of Object.entries(packages)) {
 		if (pkgOpts.inUse) {

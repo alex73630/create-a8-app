@@ -4,14 +4,14 @@
  */
 export const dependencyVersionMap = {
 	// Prisma
-	prisma: "^5.21.1",
-	"@prisma/client": "^5.21.1",
+	prisma: "^6.8.2",
+	"@prisma/client": "^6.8.2",
 
 	// Drizzle
-	"drizzle-kit": "^0.26.2",
-	"drizzle-orm": "^0.35.3",
-	pg: "^8.13.1",
-	"@types/pg": "^8.11.10",
-	"@libsql/client": "^0.14.0"
+	"drizzle-kit": "^0.31.1",
+	"drizzle-orm": "^0.44.0",
+	pg: "^8.16.0",
+	"@types/pg": "^8.15.2",
+	"@libsql/client": "^0.15.7"
 } as const
 export type AvailableDependencies = keyof typeof dependencyVersionMap
