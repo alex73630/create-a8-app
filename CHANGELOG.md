@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/alex73630/create-a8-app/compare/v2.2.0...v2.3.0) (2025-12-01)
+
+
+### Features
+
+* add vite-tsconfig-paths and update typescript configuration in template ([827d390](https://github.com/alex73630/create-a8-app/commit/827d39015c94084eaae651d47d23d6666fd3d43a))
+
 # [2.2.0](https://github.com/alex73630/create-a8-app/compare/v2.1.1...v2.2.0) (2025-12-01)
 
 
