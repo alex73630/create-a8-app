@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/alex73630/create-a8-app/compare/v2.1.1...v2.2.0) (2025-12-01)
+
+
+### Features
+
+* upgrade dependencies and remove prisma support ([9933f6d](https://github.com/alex73630/create-a8-app/commit/9933f6ddb904f62db68076b3d8c4c6a8e26bc230))
+
 ## [2.1.1](https://github.com/alex73630/create-a8-app/compare/v2.1.0...v2.1.1) (2025-05-28)
 
 
