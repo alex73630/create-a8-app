@@ -132,10 +132,8 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
-
-# database
-/prisma/db.sqlite
-/prisma/db.sqlite-journal
+# SQLite database files
+*.sqlite
 
 # typescript
 *.tsbuildinfo

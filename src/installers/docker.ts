@@ -17,11 +17,7 @@ export const dockerInstaller: Installer = ({ projectDir, packages, pkgManager })
 	const dockerfileTemplate = fs.readFileSync(dockerfileSrc, "utf-8")
 
 	// Compile the template
-	const dockerfile = handlebarsParser<{
-		usePrisma: boolean
-	}>(dockerfileTemplate, pkgManager, {
-		usePrisma: packages?.prisma.inUse ?? false
-	})
+	const dockerfile = handlebarsParser(dockerfileTemplate, pkgManager)
 
 	const dockerfileDest = path.join(projectDir, "Dockerfile")
 
@@ -33,17 +29,13 @@ export const dockerInstaller: Installer = ({ projectDir, packages, pkgManager })
 	const dockerignoreTemplate = fs.readFileSync(dockerignoreSrc, "utf-8")
 
 	// Compile the template
-	const dockerignore = handlebarsParser<{
-		usePrisma: boolean
-	}>(dockerignoreTemplate, pkgManager, {
-		usePrisma: packages?.prisma.inUse ?? false
-	})
+	const dockerignore = handlebarsParser(dockerignoreTemplate, pkgManager)
 
 	const dockerignoreDest = path.join(projectDir, ".dockerignore")
 
 	fs.writeFileSync(dockerignoreDest, dockerignore, "utf-8")
 
-	if (packages?.prisma.inUse || packages?.drizzle.inUse) {
+	if (packages?.drizzle.inUse) {
 		const dockercomposeSrc = path.join(extrasDir, "docker/docker-compose", "with-db.yaml")
 		const dockercomposeDest = path.join(projectDir, "docker-compose.yaml")
 

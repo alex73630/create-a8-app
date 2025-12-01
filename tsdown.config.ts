@@ -11,5 +11,11 @@ export default defineConfig({
 	sourcemap: true,
 	target: "esnext",
 	outDir: "dist",
+	outExtensions: () => {
+		return {
+			dts: ".d.ts",
+			js: ".js"
+		}
+	},
 	onSuccess: isDev ? "node dist/index.js" : undefined
 })

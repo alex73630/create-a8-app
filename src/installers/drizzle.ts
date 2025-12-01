@@ -61,6 +61,26 @@ export const drizzleInstaller: Installer = ({ projectDir, packages }) => {
 		"db:studio": "drizzle-kit studio"
 	}
 
+	// Add drizzle.config.ts to tsconfig.include if not present
+	const tsconfigPath = path.join(projectDir, "tsconfig.json")
+
+	// We need to read and write the tsconfig as text to preserve comments
+	let tsconfigText = fs.readFileSync(tsconfigPath, "utf-8")
+	if (!tsconfigText.includes("drizzle.config.ts")) {
+		const includeRegex = /"include"\s*:\s*\[\s*([\s\S]*?)\s*\]/m
+		const match = tsconfigText.match(includeRegex)
+		if (match && match[1]) {
+			const includes = match[1]
+				.split(",")
+				.map((line) => line.trim())
+				.filter((line) => line.length > 0)
+			includes.push('"drizzle.config.ts"')
+			const newIncludes = includes.join(",\n    ")
+			tsconfigText = tsconfigText.replace(includeRegex, `"include": [\n    ${newIncludes}\n  ]`)
+			fs.writeFileSync(tsconfigPath, tsconfigText, "utf-8")
+		}
+	}
+
 	fs.copySync(configSrc, configDest)
 	fs.copySync(schemaSrc, schemaDest)
 	fs.copySync(clientSrc, clientDest)

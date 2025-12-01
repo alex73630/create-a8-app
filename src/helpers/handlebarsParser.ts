@@ -12,7 +12,11 @@ Handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
 	return arg1 == arg2 ? options.fn(this) : options.inverse(this)
 })
 
-export function handlebarsParser<T = Record<string, unknown>>(template: string, pkgManager: PackageManager, data: T) {
+export function handlebarsParser<T = Record<string, unknown>>(
+	template: string,
+	pkgManager: PackageManager,
+	data: T = {} as T
+) {
 	const handlebarsData: HandlebarsData & T = {
 		pkgManager,
 		pkgRunExternal: pkgManager === "npm" ? "npx" : pkgManager,

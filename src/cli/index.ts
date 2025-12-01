@@ -20,8 +20,6 @@ interface CliFlags {
 	/** @internal Used in CI. */
 	CI: boolean
 	/** @internal Used in CI. */
-	prisma: boolean
-	/** @internal Used in CI. */
 	drizzle: boolean
 	/** @internal Used in CI. */
 	docker: boolean
@@ -42,7 +40,6 @@ const defaultOptions: CliResults = {
 		noInstall: false,
 		default: false,
 		CI: false,
-		prisma: false,
 		drizzle: false,
 		docker: false,
 		importAlias: "~/"
@@ -68,12 +65,6 @@ export const runCli = async () => {
 		 *               skip prompting.
 		 */
 		.option("--CI", "Boolean value if we're running in CI", false)
-		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
-		.option(
-			"--prisma [boolean]",
-			"Experimental: Boolean value if we should install Prisma. Must be used in conjunction with `--CI`.",
-			(value) => !!value && value !== "false"
-		)
 		/** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
 		.option(
 			"--drizzle [boolean]",
@@ -120,15 +111,14 @@ export const runCli = async () => {
 		CIMode = true
 		cliResults.packages = []
 		if (cliResults.flags.drizzle) cliResults.packages.push("drizzle")
-		if (cliResults.flags.prisma) cliResults.packages.push("prisma")
 		if (cliResults.flags.docker) cliResults.packages.push("docker")
 	}
 
 	// Explained below why this is in a try/catch block
 	try {
 		if (process.env.TERM_PROGRAM?.toLowerCase().includes("mintty")) {
-			logger.warn(`  WARNING: It looks like you are using MinTTY, which is non-interactive. This is most likely because you are 
-  using Git Bash. If that's that case, please use Git Bash from another terminal, such as Windows Terminal. Alternatively, you 
+			logger.warn(`  WARNING: It looks like you are using MinTTY, which is non-interactive. This is most likely because you are
+  using Git Bash. If that's that case, please use Git Bash from another terminal, such as Windows Terminal. Alternatively, you
   can provide the arguments from the CLI directly: https://create.a8.gg/en/installation#experimental-usage to skip the prompts.`)
 
 			const error = new Error("Non-interactive environment")
@@ -203,11 +193,11 @@ const promptAppName = async (): Promise<string> => {
 }
 
 const promptPackages = async (): Promise<AvailablePackages[]> => {
-	const { orm } = await inquirer.prompt<{ orm: "Prisma" | "Drizzle" | "None" }>({
+	const { orm } = await inquirer.prompt<{ orm: "Drizzle" | "None" }>({
 		name: "orm",
 		type: "select",
 		message: "Which ORM would you like to use?",
-		choices: ["None", "Drizzle", "Prisma"] // only show prisma and drizzle
+		choices: ["None", "Drizzle"] // only show drizzle
 			.map((pkgName) => ({
 				value: pkgName,
 				checked: false
@@ -219,7 +209,7 @@ const promptPackages = async (): Promise<AvailablePackages[]> => {
 		type: "checkbox",
 		message: "Which features would you like to enable?",
 		choices: availablePackages
-			.filter((pkg) => pkg !== "envVariables" && !["prisma", "drizzle"].includes(pkg)) // don't prompt for env-vars
+			.filter((pkg) => pkg !== "envVariables" && !["drizzle"].includes(pkg)) // don't prompt for env-vars
 			.map((pkgName) => ({
 				value: pkgName,
 				checked: false

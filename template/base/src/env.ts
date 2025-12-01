@@ -2,7 +2,7 @@ import { createEnv } from "@t3-oss/env-core"
 import dotenv from "dotenv"
 import z from "zod"
 
-dotenv.config()
+dotenv.config({ quiet: true })
 
 export const env = createEnv({
 	clientPrefix: "PUBLIC_",

@@ -7,15 +7,12 @@ import { type Installer } from "~/installers/index.js"
 
 export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
 	const usingDocker = packages?.docker.inUse
-	const usingPrisma = packages?.prisma.inUse
 	const usingDrizzle = packages?.drizzle.inUse
 
-	const envContent = getEnvContent(!!usingDocker, !!usingPrisma, !!usingDrizzle)
+	const envContent = getEnvContent(!!usingDocker, !!usingDrizzle)
 
 	let envFile = ""
-	if (usingPrisma) {
-		envFile = "with-prisma.ts"
-	}
+
 	if (usingDrizzle) {
 		envFile = "with-drizzle.ts"
 	}
@@ -33,7 +30,7 @@ export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
 	fs.writeFileSync(envExampleDest, exampleEnvContent + envContent, "utf-8")
 }
 
-const getEnvContent = (usingDocker: boolean, usingPrisma: boolean, usingDrizzle: boolean) => {
+const getEnvContent = (usingDocker: boolean, usingDrizzle: boolean) => {
 	let content = `
 # When adding additional environment variables, the schema in "/src/env.ts"
 # should be updated accordingly.
@@ -43,20 +40,6 @@ NODE_ENV="development"
 `
 		.trim()
 		.concat("\n")
-
-	if (usingPrisma)
-		if (usingDocker)
-			content += `
-# Prisma
-# https://www.prisma.io/docs/reference/database-reference/connection-urls#env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
-`
-		else
-			content += `
-# Prisma
-# https://www.prisma.io/docs/reference/database-reference/connection-urls#env
-DATABASE_URL="file:./db.sqlite"
-`
 
 	if (usingDrizzle)
 		if (usingDocker)
@@ -72,7 +55,7 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 DATABASE_URL="file:./db.sqlite"
 `
 
-	if (!usingDocker && !usingPrisma && !usingDrizzle)
+	if (!usingDocker && !usingDrizzle)
 		content += `
 # Example:
 # SERVERVAR="foo"

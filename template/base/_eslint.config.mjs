@@ -2,27 +2,37 @@
 
 import eslint from "@eslint/js"
 import vitest from "@vitest/eslint-plugin"
+import { defineConfig } from "eslint/config"
 import { importX } from "eslint-plugin-import-x"
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
+import globals from "globals"
 import tseslint, { configs as tsConfigs } from "typescript-eslint"
 
-export default tseslint.config(
+export default defineConfig(
 	{
 		// config with just ignores is the replacement for `.eslintignore`
-		ignores: ["**/dist", "**/node_modules"]
+		ignores: ["**/dist", "**/node_modules", "**/template", "**/my-a8-app"]
 	},
 	eslint.configs.recommended,
 	tsConfigs.recommended,
 	tsConfigs.recommendedTypeChecked,
-	importX.flatConfigs.recommended,
-	importX.flatConfigs.typescript,
 	{
-		plugins: { "@typescript-eslint": tseslint.plugin, vitest },
+		plugins: {
+			// @ts-expect-error - types issues with import-x
+			"import-x": importX
+		},
+		extends: ["import-x/flat/recommended", "import-x/flat/typescript"]
+	},
+	{
+		plugins: { "@typescript-eslint": tseslint.plugin },
 		languageOptions: {
 			parser: tseslint.parser,
 			ecmaVersion: "latest",
 			sourceType: "module",
-			parserOptions: { projectService: true }
+			parserOptions: { projectService: true },
+			globals: {
+				...globals.node
+			}
 		},
 		rules: {
 			"@typescript-eslint/restrict-template-expressions": "off",
@@ -71,7 +81,13 @@ export default tseslint.config(
 			"import-x/no-named-as-default-member": "off",
 			"import-x/no-named-as-default": "off",
 			"no-case-declarations": "off",
-			"no-useless-escape": "off"
+			"no-useless-escape": "off",
+			"@typescript-eslint/no-unsafe-argument": "off",
+			"@typescript-eslint/no-unsafe-assignment": "off",
+			"@typescript-eslint/no-unsafe-call": "off",
+			"@typescript-eslint/no-unsafe-member-access": "off",
+			"@typescript-eslint/no-unsafe-return": "off",
+			"@typescript-eslint/no-unnecessary-type-assertion": "off"
 		}
 	},
 	{
@@ -80,6 +96,7 @@ export default tseslint.config(
 		extends: [tsConfigs.disableTypeChecked]
 	},
 	{
+		plugins: { vitest: vitest },
 		// enable vitest rules on test files
 		files: ["test/**", "**/*.test.ts", "**/*.spec.ts"],
 		rules: { ...vitest.configs.recommended.rules }

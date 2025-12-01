@@ -34,7 +34,7 @@ Inspired by <a rel="noopener noreferrer" target="_blank" href="https://github.co
 The _"A8 Stack"_ is a TypeScript development stack made by [Alex73630](https://twitter.com/alex73630) focused on **simplicity**, **modularity**, and **full-stack typesafety**. It consists of:
 
 -   [TypeScript](https://typescriptlang.org)
--   [Prisma](https://prisma.io)
+-   [Drizzle](https://orm.drizzle.team)
 -   [T3-Env](https://env.t3.gg/)
 
 ### So... what is `create-a8-app`? A template?

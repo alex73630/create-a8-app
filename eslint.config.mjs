@@ -1,12 +1,13 @@
 // @ts-check
 
 import eslint from "@eslint/js"
+import { defineConfig } from "eslint/config"
 import { importX } from "eslint-plugin-import-x"
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import globals from "globals"
 import tseslint, { configs as tsConfigs } from "typescript-eslint"
 
-export default tseslint.config(
+export default defineConfig(
 	{
 		// config with just ignores is the replacement for `.eslintignore`
 		ignores: ["**/dist", "**/node_modules", "**/template", "**/my-a8-app"]
@@ -14,8 +15,13 @@ export default tseslint.config(
 	eslint.configs.recommended,
 	tsConfigs.recommended,
 	tsConfigs.recommendedTypeChecked,
-	importX.flatConfigs.recommended,
-	importX.flatConfigs.typescript,
+	{
+		plugins: {
+			// @ts-expect-error - types issues with import-x
+			"import-x": importX
+		},
+		extends: ["import-x/flat/recommended", "import-x/flat/typescript"]
+	},
 	{
 		plugins: { "@typescript-eslint": tseslint.plugin },
 		languageOptions: {
