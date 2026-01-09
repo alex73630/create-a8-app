@@ -1,3 +1,11 @@
+# [2.4.0](https://github.com/alex73630/create-a8-app/compare/v2.3.0...v2.4.0) (2026-01-09)
+
+
+### Features
+
+* add agents.md in the template ([a5df295](https://github.com/alex73630/create-a8-app/commit/a5df295b3be459132ff889de5f07bae876af80a7))
+* migrate to yarn and update packages ([7c9b181](https://github.com/alex73630/create-a8-app/commit/7c9b181ae54f13054413779f0f8cf192a89c6e75))
+
 # [2.3.0](https://github.com/alex73630/create-a8-app/compare/v2.2.0...v2.3.0) (2025-12-01)
 
 
