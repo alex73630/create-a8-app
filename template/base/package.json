@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
-		"start": "node dist/main",
+		"start": "node dist/main.mjs",
 		"start:dev": "tsdown --watch",
 		"typecheck": "tsc",
 		"clean": "rm -rf dist node_modules",

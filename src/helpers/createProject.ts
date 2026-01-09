@@ -1,5 +1,6 @@
 import path from "path"
 
+import { createAgentsFile } from "~/helpers/createAgentsFile.js"
 import { installPackages } from "~/helpers/installPackages.js"
 import { scaffoldProject } from "~/helpers/scaffoldProject.js"
 import { type PkgInstallerMap } from "~/installers/index.js"
@@ -30,6 +31,13 @@ export const createProject = async ({ projectName, packages, noInstall }: Create
 		pkgManager,
 		packages,
 		noInstall
+	})
+
+	createAgentsFile({
+		projectDir,
+		pkgManager,
+		packages,
+		projectName
 	})
 
 	return projectDir

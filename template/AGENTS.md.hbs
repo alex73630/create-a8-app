@@ -1,0 +1,69 @@
+# AI Agent Instructions for {{projectName}}
+
+This file provides context and instructions for AI agents working on this project.
+
+## Project Overview
+
+This project is a TypeScript application initialized with `create-a8-app`.
+
+### Tech Stack
+
+-   **Runtime**: Node.js
+-   **Package Manager**: {{pkgManager}}
+-   **Language**: TypeScript
+{{#if hasDrizzle}}
+-   **Database ORM**: Drizzle ORM
+{{/if}}
+{{#if hasDocker}}
+-   **Containerization**: Docker
+{{/if}}
+
+## Project Structure
+
+-   `src/`: Source code
+    -   `main.ts`: Entry point
+    -   `env.ts`: Environment variable schema
+{{#if hasDrizzle}}
+    -   `db/`: Database configuration and schema
+{{/if}}
+-   `package.json`: Dependencies and scripts
+-   `tsconfig.json`: TypeScript configuration
+{{#if hasDocker}}
+-   `Dockerfile`: Docker configuration
+-   `docker-compose.yaml`: Docker Compose configuration
+{{/if}}
+
+## Commands
+
+-   **Install dependencies**: `{{pkgManager}} install`
+-   **Run development server**: `{{pkgRunScript}} start:dev`
+-   **Build application**: `{{pkgRunScript}} build`
+-   **Start production server**: `{{pkgRunScript}} start`
+{{#if hasDrizzle}}
+-   **Database migrations**: `{{pkgRunScript}} db:push` / `{{pkgRunScript}} db:studio`
+{{/if}}
+{{#if hasDocker}}
+-   **Start Docker containers**: `docker-compose up -d`
+{{/if}}
+
+## Instructions for AI Agents
+
+1.  **Code Style**:
+    -   Follow the existing code style (Prettier, ESLint).
+    -   The project uses `esm` (type: module). **Always** include file extensions in imports (e.g., `import ... from "./foo.js"`).
+    -   Use the `~/` alias for absolute imports from `src/`.
+
+2.  **Unit Tests**:
+    -   When generating new logic, ALWAYS suggest or generate corresponding unit tests in `src/*.test.ts` files or colocated tests.
+    -   Run tests using `{{pkgRunScript}} test` (Vitest).
+
+3.  **Environment Variables**:
+    -   Refer to `src/env.ts` for available environment variables.
+    -   Do not hardcode secrets. Use `process.env` or the type-safe `env` object from `~/env.js`.
+
+{{#if hasDrizzle}}
+4.  **Database**:
+    -   Use Drizzle ORM for database interactions.
+    -   Schema definitions are in `src/db/schema.ts` (or similar).
+    -   After modifying the schema, remind the user to run migrations (`{{pkgRunScript}} db:push` or generate migrations).
+{{/if}}
